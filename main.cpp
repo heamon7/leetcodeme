@@ -6,19 +6,20 @@ using namespace std;
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int pos = 0;
+        const size_t n = nums.size();
+        int next_slot = n ? 1:0;
 
-        for (int i = 0; i < nums.size(); ++i) {
-            if (i == 0 || nums[i] != nums[pos - 1])
-                nums[pos++] = nums[i];
+        for ( int i =1; i < n; ++i)
+        {
+            if ( nums[i] != nums[i-1])
+                nums[next_slot++] = nums[i];
         }
 
-        return pos;
+        return next_slot;
     }
 };
-
 int main() {
-    int a[] = {1,2,2,3};
+    int a[] = {1,2,2,2,3};
     vector<int> v(a,a + sizeof(a)/sizeof(a[0]));
     for(auto& x:v)
         cout<<' '<<x;
