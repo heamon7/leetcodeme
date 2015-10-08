@@ -15,9 +15,9 @@ public:
                 if(nums.at(index)!=*it){
                     nums.at(++index) = *it;
                 }
-//                else{
-//                    nums.erase(it);
-//                }
+                else{
+                    nums.erase(it);
+                }
             }
             return index + 1;
         }
