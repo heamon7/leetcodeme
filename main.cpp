@@ -8,13 +8,11 @@ public:
     int removeDuplicates(vector<int>& nums) {
         const size_t n = nums.size();
         int next_slot = n ? 1:0;
-
         for ( int i =1; i < n; ++i)
         {
             if ( nums[i] != nums[i-1])
                 nums[next_slot++] = nums[i];
         }
-
         return next_slot;
     }
 };
