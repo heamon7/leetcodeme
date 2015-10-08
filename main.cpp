@@ -6,29 +6,23 @@ using namespace std;
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        if(nums.size() <= 1){
-            return nums.size();
-        }
-        else{
-            int index = 0;
-            for(vector<int> ::iterator it=nums.begin()+1;it!=nums.end();++it){
-                if(nums.at(index)!=*it){
-                    nums.at(++index) = *it;
-                }
+        int pos = 0;
 
-            }
-            nums.resize(index+1);
-            return index + 1;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (i == 0 || nums[i] != nums[pos - 1])
+                nums[pos++] = nums[i];
         }
+
+        return pos;
     }
 };
 
 int main() {
-    int a[] = {1,2};
-    vector<int> v(2,1);
-
-
-    cout<<v.size()<<endl;
+    int a[] = {1,2,2,3};
+    vector<int> v(a,a + sizeof(a)/sizeof(a[0]));
+    for(auto& x:v)
+        cout<<' '<<x;
+    cout<<endl;
     Solution solution;
     cout<<solution.removeDuplicates(v);
 
