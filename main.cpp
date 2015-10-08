@@ -15,10 +15,9 @@ public:
                 if(nums.at(index)!=*it){
                     nums.at(++index) = *it;
                 }
-                else{
-                    nums.erase(it);
-                }
+
             }
+            nums.resize(index+1);
             return index + 1;
         }
     }
