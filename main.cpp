@@ -8,17 +8,36 @@ using namespace std;
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        return distance(nums.begin(),unique(nums.begin(),nums.end()));
+        int flag = 0;
+        int pos = 0;
+        for(int i = 1;i < nums.size();i++){
+            if(nums[i] == nums[i-1]){
+                if(flag == 0){
+                    flag++;
+                    nums[++pos] = nums[i];
+                }
+            }
+            else{
+
+                nums[++pos] = nums[i];
+                flag = 0;
+            }
+        }
+        nums.resize(pos+1);
+        return pos+1;
+
     }
 };
 int main() {
-    int a[] = {1,2,2,2,3};
+    int a[] = {1,2,2,2,3,3,3,3,3,4,5,5,6,7,8,8,9,10};
     vector<int> v(a,a + sizeof(a)/sizeof(a[0]));
     for(auto& x:v)
         cout<<' '<<x;
     cout<<endl;
     Solution solution;
-    cout<<solution.removeDuplicates(v);
+    cout<<solution.removeDuplicates(v)<<endl;
+    for(auto& x:v)
+        cout<<' '<<x;
 
     return 0;
 }
