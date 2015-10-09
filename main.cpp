@@ -18,7 +18,7 @@ public:
             else if(target > nums[mid]){
                 //目标在mid的左区间的情况：1.全区间肯定roated；2.mid在小区间；3.target大于小区间最大的数
                 if(nums[mid] < nums[first] && target > nums[last] &&  nums[first] > nums[last]){
-                    last = mid;
+                    last = (mid!=last)?mid:mid-1;
                 }
                 else{
                     first = (mid!=first)?mid:mid+1;
@@ -30,7 +30,7 @@ public:
                     first = (mid!=first)?mid:mid+1;
                 }
                 else{
-                    last = mid;
+                    last = (mid!=last)?mid:mid-1;
                 }
 
             }
