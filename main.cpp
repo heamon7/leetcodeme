@@ -7,34 +7,46 @@ using namespace std;
 
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
-        int flag = 0;
-        int pos = nums.size()?1:0;
-        for(int i = 1;i < nums.size();i++){
-            if(nums[i] == nums[i-1]){
-                if(flag == 0){
-                    flag++;
-                    nums[pos++] = nums[i];
+    int search(vector<int>& nums, int target) {
+        int first = 0;
+        int last = nums.size()-1;
+        while(first<=last){
+            int mid = (first+last)/2;
+            if(target == nums[mid]){
+                return mid;
+            }
+            else if(target > nums[mid]){
+                //目标在mid的左区间的情况：1.全区间肯定roated；2.mid在小区间；3.target大于小区间最大的数
+                if(nums[mid] < nums[first] && target > nums[last] &&  nums[first] > nums[last]){
+                    last = mid;
+                }
+                else{
+                    first = (mid!=first)?mid:mid+1;
                 }
             }
             else{
-                nums[pos++] = nums[i];
-                flag = 0;
+                //目标在mid的右区间的情况：1.全区间roated；2.mid在大区间；3.target小于大区间的最小数
+                if(nums[mid] > nums[last] && target < nums[first] && nums[first] > nums[last]){
+                    first = (mid!=first)?mid:mid+1;
+                }
+                else{
+                    last = mid;
+                }
+
             }
         }
-        nums.resize(pos);
-        return pos;
+        return -1;
     }
 };
 
 int main() {
-    int a[] = {1,2,2,2,3,3,3,3,3,4,5,5,6,7,8,8,9,10};
-    vector<int> v(a,a + sizeof(a)/sizeof(a[0]));
+    int a[] = {1};
+    vector<int> v(a,a + sizeof(a)/sizeof(*a));
     for(auto& x:v)
         cout<<' '<<x;
     cout<<endl;
     Solution solution;
-    cout<<solution.removeDuplicates(v)<<endl;
+    cout<<solution.search(v,0)<<endl;
     for(auto& x:v)
         cout<<' '<<x;
 
