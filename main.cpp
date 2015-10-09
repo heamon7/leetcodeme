@@ -8,22 +8,11 @@ using namespace std;
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int flag = 0;
-        int pos = nums.size()?1:0;
-        for(int i = 1;i < nums.size();i++){
-            if(nums[i] == nums[i-1]){
-                if(flag == 0){
-                    flag++;
-                    nums[pos++] = nums[i];
-                }
-            }
-            else{
-                nums[pos++] = nums[i];
-                flag = 0;
-            }
-        }
-        nums.resize(pos);
-        return pos;
+        int i = 0;
+        for (int n : nums)
+            if (i < 2 || n > nums[i-2])
+                nums[i++] = n;
+        return i;
     }
 };
 
